@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre Nós - Dondza Abroad</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #000;
+      color: white;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: rgb(17, 15, 15);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 40px;
+      position: relative;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo img {
+      height: 50px;
+      margin-right: 10px;
+    }
+
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .logo-text h1 {
+      font-size: 20px;
+      margin: 0;
+      white-space: nowrap;
+    }
+
+    .logo-text p {
+      font-size: 12px;
+      color: #dcdcdc;
+      margin-top: -4px;
+      white-space: nowrap;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: rgb(195, 70, 70);
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    .yellow-bar {
+      height: 4px;
+      background-color: rgb(195, 70, 70);
+    }
+
+    .about-section {
+      padding: 60px 20px;
+      max-width: 1000px;
+      margin: auto;
+      animation: fadeIn 1s ease-in;
+    }
+
+    .about-section h2 {
+      color: rgb(195, 70, 70);
+      margin-bottom: 25px;
+      font-size: 30px;
+      text-align: center;
+    }
+
+    .about-section p {
+      color: #ccc;
+      font-size: 16px;
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    .card-container-column {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      margin-top: 40px;
+    }
+
+    .about-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1a1a1a;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      gap: 20px;
+      flex-wrap: wrap;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+
+    .about-row.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .about-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .about-text h3 {
+      color: rgb(195, 70, 70);
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .about-text p,
+    .about-text li {
+      color: #ccc;
+      font-size: 15px;
+    }
+
+    .about-image {
+      flex-shrink: 0;
+    }
+
+    .about-image img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .values-list {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .values-list li {
+      margin-bottom: 10px;
+    }
+
+    .values-list strong {
+      color: rgb(195, 70, 70);
+    }
+
+    footer {
+      background-color: #111;
+      padding: 25px 20px;
+      text-align: center;
+      color: #ccc;
+      font-size: 13px;
+    }
+
+    footer a {
+      color: rgb(195, 70, 70);
+      text-decoration: none;
+      margin: 0 8px;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+
+    .text {
+      text-align: center;
+      padding: 40px 20px 0;
+    }
+
+    .text h2 {
+      color: rgb(195, 70, 70);
+      margin-bottom: 10px;
+    }
+
+    
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    @media (max-width: 768px) {
+
+      .header-top {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        padding-top: 10px;
+      }
+
+      nav.show {
+        display: flex;
+      }
+
+      nav a {
+        padding: 10px 0;
+        font-size: 16px;
+      }
+
+      .menu-toggle {
+        display: flex;
+        position: absolute;
+        right: 20px;
+        top: 15px;
+      }
+
+      .logo-text h1 {
+        font-size: 18px;
+      }
+
+      .logo-text p {
+        font-size: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <div class="logo">
+        <img src="c:\Users\louis\OneDrive\Ambiente de Trabalho\Site DA\WhatsApp Image 2025-02-20 at 17.30.33-fotor-20250617144948.png" alt="Logo DA" class="logo" alt="Dondza Abroad">
+        <div class="logo-text">
+          <h1>Dondza Abroad</h1>
+          <p>"Educação sem fronteiras, oportunidades sem limites"</p>
+        </div>
+      </div>
+      <div class="menu-toggle" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <nav id="main-nav">
+        <a href="paginainicial.html">Início</a>
+        <a href="sobrenos.html">Sobre Nós</a>
+        <a href="servicos.html">Serviços</a>
+        <a href="contato.html">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="yellow-bar"></div>
+
+  <section class="about-section">
+    <h2>Quem Somos?</h2>
+    <p>A Dondza Abroad é uma agência educacional moderna focada em conectar estudantes com instituições de ensino superior ao redor do mundo. Oferecemos suporte estratégico e personalizado para cada fase do processo de candidatura internacional.</p>
+    <p>Embora ainda sejamos uma agência jovem, nossa energia, dedicação e foco prático já fizeram a diferença na vida de diversos estudantes. Valorizamos a confiança e buscamos sempre soluções claras e eficazes.</p>
+
+    <div class="card-container-column">
+      <div class="about-row">
+        <div class="about-text">
+          <h3>Nossa Missão</h3>
+          <p>Capacitar jovens através da educação internacional, promovendo acesso a universidades estrangeiras com orientação especializada e foco nos seus sonhos acadêmicos.</p>
+        </div>
+      </div>
+
+      <div class="about-row">
+        <div class="about-text">
+          <h3>Nossa Visão</h3>
+          <p>Ser reconhecida como uma referência em consultoria educacional em Moçambique, com compromisso, excelência e foco em resultados concretos.</p>
+        </div>
+      </div>
+
+      <div class="about-row">
+        <div class="about-text">
+          <h3>Nossos Valores</h3>
+          <ul class="values-list">
+            <li><strong>Transparência:</strong> Comunicação direta e honesta.</li>
+            <li><strong>Dedicação:</strong> Comprometimento com cada estudante.</li>
+            <li><strong>Agilidade:</strong> Processos eficientes e atualizados.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Dondza Abroad. Todos os direitos reservados. |
+    <a href="#">Termos</a> |
+    <a href="#">Privacidade</a>
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("main-nav").classList.toggle("show");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, {
+      threshold: 0.2
+    });
+
+    document.querySelectorAll('.about-row').forEach(row => {
+      observer.observe(row);
+    });
+  </script>
+</body>
+</html>
