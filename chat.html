@@ -2,68 +2,35 @@
 <html lang="pt">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Chatbot da Agência</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chat da Agência</title>
   <style>
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      margin: 0; font-family: Arial, sans-serif;
+      background: #f5f5f5; display: flex;
+      justify-content: center; align-items: center; height: 100vh;
     }
-
     #chatbox {
-      width: 350px;
-      height: 500px;
-      background: white;
-      border-radius: 10px;
+      width: 350px; height: 500px;
+      background: white; border-radius: 10px;
       box-shadow: 0 0 15px rgba(0,0,0,0.2);
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
+      display: flex; flex-direction: column; overflow: hidden;
     }
-
     #messages {
-      flex: 1;
-      padding: 15px;
-      overflow-y: auto;
-      font-size: 14px;
+      flex: 1; padding: 15px; overflow-y: auto; font-size: 14px;
     }
-
     #input-area {
-      display: flex;
-      border-top: 1px solid #ccc;
+      display: flex; border-top: 1px solid #ccc;
     }
-
     #userInput {
-      flex: 1;
-      padding: 10px;
-      border: none;
-      font-size: 14px;
+      flex: 1; padding: 10px; border: none; font-size: 14px;
     }
-
     #sendBtn {
-      background: #007BFF;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      cursor: pointer;
+      background: #C34646; color: white;
+      border: none; padding: 10px 15px; cursor: pointer;
     }
-
-    .user-msg {
-      text-align: right;
-      color: #007BFF;
-      margin: 10px 0;
-    }
-
-    .bot-msg {
-      text-align: left;
-      color: #333;
-      margin: 10px 0;
-    }
+    .user-msg { text-align: right; color: #C34646; margin: 10px 0; }
+    .bot-msg { text-align: left; color: #333; margin: 10px 0; }
   </style>
 </head>
 <body>
@@ -73,7 +40,7 @@
       <div class="bot-msg">Olá! Como posso ajudar?</div>
     </div>
     <div id="input-area">
-      <input type="text" id="userInput" placeholder="Digite sua pergunta..." />
+      <input id="userInput" placeholder="Digite sua pergunta..." autocomplete="off" />
       <button id="sendBtn">Enviar</button>
     </div>
   </div>
@@ -95,26 +62,15 @@
       const text = msg.toLowerCase();
 
       if (text.includes("documento") || text.includes("documentos")) {
-        return "Precisas de BI ou passaporte, certificado, carta de motivação e boletim.";
+        return "Precisas de BI, certificado, carta de motivação, boletim e passaporte.";
       }
-
-      if (text.includes("bolsa") || text.includes("ajuda financeira")) {
+      if (text.includes("bolsa")) {
         return "Temos bolsas disponíveis! Podemos avaliar teu perfil numa consultoria.";
       }
-
-      if (text.includes("prazo") || text.includes("data limite") || text.includes("até quando")) {
+      if (text.includes("prazo")) {
         return "É recomendável iniciar com pelo menos 6 meses de antecedência.";
       }
-
-      if (text.includes("curso") || text.includes("universidade")) {
-        return "Trabalhamos com universidades em Portugal, Canadá, Brasil, e outros.";
-      }
-
-      if (text.includes("tradução")) {
-        return "Ajudamos com tradução certificada de documentos, sim!";
-      }
-
-      return "Desculpa, não entendi bem. Podes reformular ou entrar em contacto com um consultor.";
+      return "Desculpa, não entendi. Podes reformular?";
     }
 
     function sendMessage() {
@@ -133,10 +89,8 @@
     }
 
     sendBtn.addEventListener('click', sendMessage);
-    userInput.addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        sendMessage();
-      }
+    userInput.addEventListener('keypress', e => {
+      if (e.key === 'Enter') sendMessage();
     });
   </script>
 
