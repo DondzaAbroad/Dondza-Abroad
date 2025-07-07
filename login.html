@@ -107,12 +107,13 @@
   </form>
 
   <script>
-    const users = {
+    if (!users) {
+      users {
       "joao": { password: "1234", needsPasswordChange: true },
       "maria": { password: "abcd", needsPasswordChange: true },
       "ana": { password: "senha", needsPasswordChange: true }
     };
-
+    localStorage.setItem("users",JSON.stringify(users));
     let currentUser = null;
 
     const loginForm = document.getElementById("login-form");
@@ -174,6 +175,7 @@
       users[currentUser].password = newPassword;
       users[currentUser].needsPasswordChange = false;
 
+      localStorage.setItem("users", JSON.stringify(users));
       changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
 
       setTimeout(() => {
