@@ -1,100 +1,96 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Portal do Estudante</title>
+  <meta charset="UTF-8">
+  <title>Login do Estudante</title>
   <style>
     body {
       background-color: #000;
       color: #fff;
       font-family: Arial, sans-serif;
       display: flex;
+      height: 100vh;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       margin: 0;
     }
 
     .login-box {
       background-color: #111;
+      padding: 30px;
       border: 2px solid red;
       border-radius: 10px;
-      padding: 30px;
       width: 300px;
-      box-shadow: 0 0 15px red;
-    }
-
-    .login-box h2 {
       text-align: center;
-      color: red;
-      margin-bottom: 20px;
     }
 
-    .login-box input {
+    input, button {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
-      background: #222;
+      margin-top: 10px;
+      background-color: #222;
       border: 1px solid red;
-      color: #fff;
       border-radius: 5px;
+      color: white;
     }
 
-    .login-box button {
-      width: 100%;
-      padding: 10px;
-      background: red;
-      border: none;
-      color: #000;
+    button {
+      background-color: red;
+      color: black;
       font-weight: bold;
-      border-radius: 5px;
       cursor: pointer;
+    }
+
+    .message {
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    .success {
+      color: lightgreen;
     }
 
     .error {
       color: red;
-      text-align: center;
-      margin-top: 10px;
-    }
-
-    .success {
-      color: lime;
-      text-align: center;
-      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 
   <div class="login-box">
-    <h2>Login</h2>
-    <input type="text" id="username" placeholder="Usuário">
+    <h2>Login do Estudante</h2>
+    <input type="text" id="username" placeholder="Nome de usuário">
     <input type="password" id="password" placeholder="Senha">
     <button onclick="login()">Entrar</button>
-    <div id="message"></div>
+    <div id="message" class="message"></div>
   </div>
 
   <script>
-    // 👥 Lista de usuários e senhas correspondentes
+    // Lista de usuários válidos
     const users = {
-      "joao": "senha123",
-      "maria": "abc456",
-      "paulo": "xyz789"
+      joao: "senha123",
+      maria: "abc456",
+      paulo: "xyz789"
     };
 
     function login() {
-      const username = document.getElementById("username").value;
+      const username = document.getElementById("username").value.trim().toLowerCase();
       const password = document.getElementById("password").value;
       const message = document.getElementById("message");
 
       if (users[username] && users[username] === password) {
-        
+        message.textContent = "Login bem-sucedido!";
+        message.className = "message success";
+
+        // Espera 1 segundo e vai para portal com nome do usuário
+        setTimeout(() => {
+          window.location.href = portal.html?user=${encodeURIComponent(username)};
+        }, 1000);
       } else {
-        message.innerHTML = "<p class='error'>Usuário ou senha incorretos.</p>";
+        message.textContent = "Usuário ou senha incorretos.";
+        message.className = "message error";
       }
     }
-    window.location.href = portal.html?user=${encodeURIComponent(username)};
   </script>
 
 </body>
