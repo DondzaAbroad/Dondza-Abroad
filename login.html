@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Multiusuário</title>
+  <style>
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-box {
+      background-color: #111;
+      border: 2px solid red;
+      border-radius: 10px;
+      padding: 30px;
+      width: 300px;
+      box-shadow: 0 0 15px red;
+    }
+
+    .login-box h2 {
+      text-align: center;
+      color: red;
+      margin-bottom: 20px;
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      background: #222;
+      border: 1px solid red;
+      color: #fff;
+      border-radius: 5px;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 10px;
+      background: red;
+      border: none;
+      color: #000;
+      font-weight: bold;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .error {
+      color: red;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .success {
+      color: lime;
+      text-align: center;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="login-box">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário">
+    <input type="password" id="password" placeholder="Senha">
+    <button onclick="login()">Entrar</button>
+    <div id="message"></div>
+  </div>
+
+  <script>
+    // 👥 Lista de usuários e senhas correspondentes
+    const users = {
+      "joao": "senha123",
+      "maria": "abc456",
+      "paulo": "xyz789"
+    };
+
+    function login() {
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      const message = document.getElementById("message");
+
+      if (users[username] && users[username] === password) {
+        message.innerHTML = "<p class='success'>Login bem-sucedido! Bem-vindo, " + username + ".</p>";
+        // Redirecionar se quiser:
+        // window.location.href = "dashboard.html";
+      } else {
+        message.innerHTML = "<p class='error'>Usuário ou senha incorretos.</p>";
+      }
+    }
+  </script>
+
+</body>
+</html>
