@@ -5,69 +5,87 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login com troca obrigatória de senha</title>
   <style>
+    /* Fundo preto e corpo com 100vh para centralizar */
     body {
       font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 30px auto;
-      padding: 10px;
+      height: 100vh;
+      margin: 0;
       background: black;
-      border-radius: 8px;
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center;    /* vertical center */
+      padding: 10px;
     }
-    h2 {
-      text-align: center;
-      color: white;
-    }
+
+    /* Box branco com borda vermelha e sombra vermelha */
     form {
       background: white;
-      padding: 20px;
-      border-radius: 6px;
-      box-shadow: rgb(195, 70, 70);
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgb(195, 70, 70);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      color: black;
       margin-bottom: 20px;
     }
+
     label {
       display: block;
       margin-top: 12px;
       margin-bottom: 6px;
       font-weight: bold;
+      color: black;
     }
+
     input[type="text"], input[type="password"] {
       width: 100%;
-      padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1.5px solid rgb(195, 70, 70);
       box-sizing: border-box;
+      font-size: 16px;
     }
+
     button {
       margin-top: 20px;
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       background: rgb(195, 70, 70);
       border: none;
       color: white;
       font-weight: bold;
-      font-size: 16px;
-      border-radius: 4px;
+      font-size: 18px;
+      border-radius: 5px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
+
     button:hover {
-      background: #0056b3;
+      background: #b03939;
     }
+
     .error {
       color: red;
       margin-top: 10px;
+      font-weight: 600;
     }
+
     .success {
       color: green;
       margin-top: 10px;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-  <h2>Login</h2>
-
-  <!-- Formulário de login -->
   <form id="login-form">
+    <h2>Login</h2>
     <label for="username">Usuário:</label>
     <input type="text" id="username" required />
 
@@ -78,7 +96,6 @@
     <div class="error" id="login-error"></div>
   </form>
 
-  <!-- Formulário para trocar a senha -->
   <form id="change-password-form" style="display:none;">
     <h2>Alterar Senha (Obrigatório)</h2>
     <label for="new-password">Nova senha:</label>
@@ -90,7 +107,6 @@
   </form>
 
   <script>
-    // "Banco" de usuários com senhas e flag para troca obrigatória
     const users = {
       "joao": { password: "1234", needsPasswordChange: true },
       "maria": { password: "abcd", needsPasswordChange: true },
@@ -106,14 +122,12 @@
     const changeError = document.getElementById("change-error");
     const changeSuccess = document.getElementById("change-success");
 
-    // Função para limpar erros e mensagens
     function clearMessages() {
       loginError.textContent = "";
       changeError.textContent = "";
       changeSuccess.textContent = "";
     }
 
-    // Login
     loginForm.addEventListener("submit", function(e) {
       e.preventDefault();
       clearMessages();
@@ -134,16 +148,13 @@
       currentUser = username;
 
       if (users[username].needsPasswordChange) {
-        // Mostrar o formulário de troca de senha
         loginForm.style.display = "none";
         changeForm.style.display = "block";
       } else {
-        // Se não precisar trocar, vai direto pra portal
         redirectToPortal();
       }
     });
 
-    // Trocar senha
     changeForm.addEventListener("submit", function(e) {
       e.preventDefault();
       clearMessages();
@@ -160,22 +171,20 @@
         return;
       }
 
-      // Atualiza a senha e limpa a flag
       users[currentUser].password = newPassword;
       users[currentUser].needsPasswordChange = false;
 
       changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
 
-      // Após 1.5 segundos redireciona para portal.html
       setTimeout(() => {
         redirectToPortal();
       }, 1500);
     });
 
     function redirectToPortal() {
-      // Aqui pode passar o nome do usuário via query string ou sessionStorage, se quiser
       window.location.href = "portal.html";
     }
   </script>
+
 </body>
 </html>
