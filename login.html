@@ -345,6 +345,8 @@
       "ana": { password: "senha", needsPasswordChange: true }
     };
 
+    const users= JSON.parse (localStorage.getItem ("users"))||defaultUsers;
+
     let currentUser = null;
 
     const loginForm = document.getElementById("login-form");
@@ -406,6 +408,7 @@
       users[currentUser].password = newPassword;
       users[currentUser].needsPasswordChange = false;
 
+      localStorage.setItem("users", JSON.stringify (users));
       changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
 
       setTimeout(() => {
