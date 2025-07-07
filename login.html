@@ -107,6 +107,7 @@
   </form>
 
   <script>
+    let users =  JSON.parse(localStorage.getItem("users"))
     if (!users) {
       users {
       "joao": { password: "1234", needsPasswordChange: true },
