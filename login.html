@@ -89,9 +89,7 @@
       const message = document.getElementById("message");
 
       if (users[username] && users[username] === password) {
-        message.innerHTML = "<p class='success'>Login bem-sucedido! Bem-vindo, " + username + ".</p>";
-        // Redirecionar se quiser:
-        // window.location.href = "dashboard.html";
+        
       } else {
         message.innerHTML = "<p class='error'>Usuário ou senha incorretos.</p>";
       }
