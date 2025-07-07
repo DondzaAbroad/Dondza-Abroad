@@ -19,7 +19,574 @@
 
     /* Box branco com borda vermelha e sombra vermelha */
     form {
-      background: white;
+      background: <!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login com troca obrigatória de senha</title>
+  <style>
+    /* Fundo preto e corpo com 100vh para centralizar */
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center;    /* vertical center */
+      padding: 10px;
+    }
+
+    /* Box branco com borda vermelha e sombra vermelha */
+    form {
+      background: <!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login com troca obrigatória de senha</title>
+  <style>
+    /* Fundo preto e corpo com 100vh para centralizar */
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center;    /* vertical center */
+      padding: 10px;
+    }
+
+    /* Box branco com borda vermelha e sombra vermelha */
+    form {
+      background: <!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login com troca obrigatória de senha</title>
+  <style>
+    /* Fundo preto e corpo com 100vh para centralizar */
+    body {
+      font-family: Arial, sans-serif;
+      height: 100vh;
+      margin: 0;
+      background: black;
+      display: flex;
+      justify-content: center; /* horizontal center */
+      align-items: center;    /* vertical center */
+      padding: 10px;
+    }
+
+    /* Box branco com borda vermelha e sombra vermelha */
+    form {
+      background: rgb (195, 70, 70);
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15 black;
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: black;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1.5px solid rgb(195, 70, 70);
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: rgb(195, 70, 70);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background: #b03939;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="login-form">
+    <h2>Login</h2>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" required />
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required />
+
+    <button type="submit">Entrar</button>
+    <div class="error" id="login-error"></div>
+  </form>
+
+  <form id="change-password-form" style="display:none;">
+    <h2>Alterar Senha (Obrigatório)</h2>
+    <label for="new-password">Nova senha:</label>
+    <input type="password" id="new-password" required />
+
+    <button type="submit">Salvar nova senha</button>
+    <div class="error" id="change-error"></div>
+    <div class="success" id="change-success"></div>
+  </form>
+
+  <script>
+    const users = {
+      "joao": { password: "1234", needsPasswordChange: true },
+      "maria": { password: "abcd", needsPasswordChange: true },
+      "ana": { password: "senha", needsPasswordChange: true }
+    };
+
+    let currentUser = null;
+
+    const loginForm = document.getElementById("login-form");
+    const loginError = document.getElementById("login-error");
+
+    const changeForm = document.getElementById("change-password-form");
+    const changeError = document.getElementById("change-error");
+    const changeSuccess = document.getElementById("change-success");
+
+    function clearMessages() {
+      loginError.textContent = "";
+      changeError.textContent = "";
+      changeSuccess.textContent = "";
+    }
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const username = loginForm.username.value.trim().toLowerCase();
+      const password = loginForm.password.value;
+
+      if (!users[username]) {
+        loginError.textContent = "Usuário não encontrado.";
+        return;
+      }
+
+      if (users[username].password !== password) {
+        loginError.textContent = "Senha incorreta.";
+        return;
+      }
+
+      currentUser = username;
+
+      if (users[username].needsPasswordChange) {
+        loginForm.style.display = "none";
+        changeForm.style.display = "block";
+      } else {
+        redirectToPortal();
+      }
+    });
+
+    changeForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const newPassword = changeForm["new-password"].value;
+
+      if (!newPassword) {
+        changeError.textContent = "A nova senha não pode estar vazia.";
+        return;
+      }
+
+      if (newPassword === users[currentUser].password) {
+        changeError.textContent = "A nova senha não pode ser igual à senha antiga.";
+        return;
+      }
+
+      users[currentUser].password = newPassword;
+      users[currentUser].needsPasswordChange = false;
+
+      changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
+
+      setTimeout(() => {
+        redirectToPortal();
+      }, 1500);
+    });
+
+    function redirectToPortal() {
+      window.location.href = "portal.html";
+    }
+  </script>
+
+</body>
+</html>;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgb(195, 70, 70);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: black;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1.5px solid rgb(195, 70, 70);
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: rgb(195, 70, 70);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background: #b03939;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="login-form">
+    <h2>Login</h2>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" required />
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required />
+
+    <button type="submit">Entrar</button>
+    <div class="error" id="login-error"></div>
+  </form>
+
+  <form id="change-password-form" style="display:none;">
+    <h2>Alterar Senha (Obrigatório)</h2>
+    <label for="new-password">Nova senha:</label>
+    <input type="password" id="new-password" required />
+
+    <button type="submit">Salvar nova senha</button>
+    <div class="error" id="change-error"></div>
+    <div class="success" id="change-success"></div>
+  </form>
+
+  <script>
+    const users = {
+      "joao": { password: "1234", needsPasswordChange: true },
+      "maria": { password: "abcd", needsPasswordChange: true },
+      "ana": { password: "senha", needsPasswordChange: true }
+    };
+
+    let currentUser = null;
+
+    const loginForm = document.getElementById("login-form");
+    const loginError = document.getElementById("login-error");
+
+    const changeForm = document.getElementById("change-password-form");
+    const changeError = document.getElementById("change-error");
+    const changeSuccess = document.getElementById("change-success");
+
+    function clearMessages() {
+      loginError.textContent = "";
+      changeError.textContent = "";
+      changeSuccess.textContent = "";
+    }
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const username = loginForm.username.value.trim().toLowerCase();
+      const password = loginForm.password.value;
+
+      if (!users[username]) {
+        loginError.textContent = "Usuário não encontrado.";
+        return;
+      }
+
+      if (users[username].password !== password) {
+        loginError.textContent = "Senha incorreta.";
+        return;
+      }
+
+      currentUser = username;
+
+      if (users[username].needsPasswordChange) {
+        loginForm.style.display = "none";
+        changeForm.style.display = "block";
+      } else {
+        redirectToPortal();
+      }
+    });
+
+    changeForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const newPassword = changeForm["new-password"].value;
+
+      if (!newPassword) {
+        changeError.textContent = "A nova senha não pode estar vazia.";
+        return;
+      }
+
+      if (newPassword === users[currentUser].password) {
+        changeError.textContent = "A nova senha não pode ser igual à senha antiga.";
+        return;
+      }
+
+      users[currentUser].password = newPassword;
+      users[currentUser].needsPasswordChange = false;
+
+      changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
+
+      setTimeout(() => {
+        redirectToPortal();
+      }, 1500);
+    });
+
+    function redirectToPortal() {
+      window.location.href = "portal.html";
+    }
+  </script>
+
+</body>
+</html>;
+      padding: 20px 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 15px rgb(195, 70, 70);
+      max-width: 400px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    h2 {
+      text-align: center;
+      color: black;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 6px;
+      font-weight: bold;
+      color: black;
+    }
+
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 5px;
+      border: 1.5px solid rgb(195, 70, 70);
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: rgb(195, 70, 70);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 18px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background: #b03939;
+    }
+
+    .error {
+      color: red;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+
+    .success {
+      color: green;
+      margin-top: 10px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <form id="login-form">
+    <h2>Login</h2>
+    <label for="username">Usuário:</label>
+    <input type="text" id="username" required />
+
+    <label for="password">Senha:</label>
+    <input type="password" id="password" required />
+
+    <button type="submit">Entrar</button>
+    <div class="error" id="login-error"></div>
+  </form>
+
+  <form id="change-password-form" style="display:none;">
+    <h2>Alterar Senha (Obrigatório)</h2>
+    <label for="new-password">Nova senha:</label>
+    <input type="password" id="new-password" required />
+
+    <button type="submit">Salvar nova senha</button>
+    <div class="error" id="change-error"></div>
+    <div class="success" id="change-success"></div>
+  </form>
+
+  <script>
+    const users = {
+      "joao": { password: "1234", needsPasswordChange: true },
+      "maria": { password: "abcd", needsPasswordChange: true },
+      "ana": { password: "senha", needsPasswordChange: true }
+    };
+
+    let currentUser = null;
+
+    const loginForm = document.getElementById("login-form");
+    const loginError = document.getElementById("login-error");
+
+    const changeForm = document.getElementById("change-password-form");
+    const changeError = document.getElementById("change-error");
+    const changeSuccess = document.getElementById("change-success");
+
+    function clearMessages() {
+      loginError.textContent = "";
+      changeError.textContent = "";
+      changeSuccess.textContent = "";
+    }
+
+    loginForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const username = loginForm.username.value.trim().toLowerCase();
+      const password = loginForm.password.value;
+
+      if (!users[username]) {
+        loginError.textContent = "Usuário não encontrado.";
+        return;
+      }
+
+      if (users[username].password !== password) {
+        loginError.textContent = "Senha incorreta.";
+        return;
+      }
+
+      currentUser = username;
+
+      if (users[username].needsPasswordChange) {
+        loginForm.style.display = "none";
+        changeForm.style.display = "block";
+      } else {
+        redirectToPortal();
+      }
+    });
+
+    changeForm.addEventListener("submit", function(e) {
+      e.preventDefault();
+      clearMessages();
+
+      const newPassword = changeForm["new-password"].value;
+
+      if (!newPassword) {
+        changeError.textContent = "A nova senha não pode estar vazia.";
+        return;
+      }
+
+      if (newPassword === users[currentUser].password) {
+        changeError.textContent = "A nova senha não pode ser igual à senha antiga.";
+        return;
+      }
+
+      users[currentUser].password = newPassword;
+      users[currentUser].needsPasswordChange = false;
+
+      changeSuccess.textContent = "Senha alterada com sucesso! Redirecionando...";
+
+      setTimeout(() => {
+        redirectToPortal();
+      }, 1500);
+    });
+
+    function redirectToPortal() {
+      window.location.href = "portal.html";
+    }
+  </script>
+
+</body>
+</html>;
       padding: 20px 30px;
       border-radius: 8px;
       box-shadow: 0 0 15px rgb(195, 70, 70);
