@@ -82,10 +82,9 @@
         message.textContent = "Login bem-sucedido!";
         message.className = "message success";
 
-        // Redireciona para portal.html com nome na URL
-        setTimeout(() => {
-          window.location.href = portal.html?user=${encodeURIComponent(username)};
-        }, 1000);
+        
+          window.location.href = "portal.html";
+       
       } else {
         message.textContent = "Usuário ou senha incorretos.";
         message.className = "message error";
