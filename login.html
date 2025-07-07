@@ -345,7 +345,7 @@
       "ana": { password: "senha", needsPasswordChange: true }
     };
 
-    const users= JSON.parse (localStorage.getItem ("users"))||defaultUsers;
+    const users= JSON.parse (localStorage.setItem ("users",JSON.stringify(users));
 
     let currentUser = null;
 
