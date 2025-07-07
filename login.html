@@ -124,16 +124,11 @@
     const changeError = document.getElementById("change-error");
     const changeSuccess = document.getElementById("change-success");
 
-    function clearMessages() {
-      loginError.textContent = "";
-      changeError.textContent = "";
-      changeSuccess.textContent = "";
-    }
       
 
     loginForm.addEventListener("submit", function(e) {
       e.preventDefault();
-      clearMessages();
+     
 
       const username = loginForm.username.value.trim().toLowerCase();
       const password = loginForm.password.value;
