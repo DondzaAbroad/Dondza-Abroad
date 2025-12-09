@@ -267,28 +267,32 @@
     </div>
     <div class="form-container">
       <h1 style="text-align: center; color: rgb(195, 70, 70)">Contacte-Nos</h1> <br>
-<form id="contact-form">
-  <input type="hidden" name="_captcha" value="false">
-  <input type="hidden" name="_next" value="">
+<div class="form-container">
+      <h1 style="text-align: center;">Contacte-Nos</h1>
+      <form action="https://formsubmit.co/louispaulojr@gmail.com" method="POST">
 
-  <label for="name">Nome:</label>
-  <input type="text" id="name" name="name" required>
+        <!-- Desativa Captcha e Redireciona -->
+        <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_next" value="https://teusite.com/sucesso.html">
+      
+        <label for="name">Nome:</label>
+        <input type="text" id="name" name="name" required>
+      
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+      
+        <label for="message">Mensagem:</label>
+        <textarea id="message" name="message" required></textarea>
+      
+        <button type="submit">Submeter</button>
+      </form>
+      <p id="success-message" style="display: none; color: green; text-align: center; margin-top: 1rem;">
+        A sua mensagem foi submetida com sucesso.
+      </p>
+    </div>
 
-  <label for="email">Email:</label>
-  <input type="email" id="email" name="email" required>
 
-  <label for="message">Mensagem:</label>
-  <textarea id="message" name="message" required></textarea>
 
-  <button type="submit">Submeter</button>
-</form>
-
-<p id="success-message" style="display: none; color: green; text-align: center; margin-top: 1rem;">
-  A sua mensagem foi enviada com sucesso!
-</p>
-<p id="error-message" style="display: none; color: red; text-align: center; margin-top: 1rem;">
-  Ocorreu um erro ao enviar. Tente novamente.
-</p>
       <script>
 document.getElementById("contact-form").addEventListener("submit", function (e) {
   e.preventDefault(); // Impede o envio tradicional
@@ -333,3 +337,4 @@ document.getElementById("contact-form").addEventListener("submit", function (e) 
   </script>
 </body>
 </html>
+
