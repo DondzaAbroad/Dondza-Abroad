@@ -4,7 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Dondza Abroad</title>
+  
+  <!-- Font Awesome para ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+  <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;600&display=swap" rel="stylesheet"/>
+  
   <style>
     * {
       margin: 0;
@@ -174,18 +180,15 @@
       margin: 4px 0;
     }
 
-    /* Mensagem de sucesso */
+    /* Mensagem de sucesso - APENAS TEXTO VERDE */
     #success-message {
       display: none;
       color: #4caf50;
       text-align: center;
       margin-top: 1rem;
-      font-weight: bold;
+      font-weight: 500;
       font-size: 1.1rem;
-      padding: 10px;
-      background-color: #1e2a1e;
-      border-radius: 6px;
-      border: 1px solid #4caf50;
+      /* Sem fundo, sem borda, sem padding extra */
     }
 
     @media (max-width: 768px) {
@@ -285,16 +288,13 @@
     <div class="form-container">
       <h1 style="text-align: center;">Contacte-Nos</h1>
       
-      <!-- Formulário com onsubmit inline para garantir que o redirecionamento seja bloqueado -->
+      <!-- Formulário com onsubmit inline -->
       <form id="contact-form" 
             action="https://formsubmit.co/dondzabroad@gmail.com" 
             method="POST"
             onsubmit="return handleSubmit(event);">
         
-        <!-- Desativa o Captcha -->
         <input type="hidden" name="_captcha" value="false">
-        <!-- Remove o _next para evitar redirecionamento -->
-        <!-- <input type="hidden" name="_next" value=""> -->
         
         <label for="name">Nome:</label>
         <input type="text" id="name" name="name" required>
@@ -308,9 +308,10 @@
         <button type="submit" id="submit-btn">Submeter</button>
       </form>
       
-      <!-- Mensagem de sucesso -->
+      <!-- Mensagem de sucesso com ícone Font Awesome -->
       <div id="success-message">
-        ✅ A sua mensagem foi submetida com sucesso.
+        <i class="fas fa-check-circle" style="margin-right: 8px;"></i>
+        A sua mensagem foi submetida com sucesso.
       </div>
     </div>
   </div>
@@ -330,9 +331,8 @@
       }
     }
 
-    // Função global para o evento submit (chamada pelo onsubmit inline)
+    // Função global para o evento submit
     window.handleSubmit = function(event) {
-      // Impede o envio tradicional
       event.preventDefault();
       event.stopPropagation();
 
@@ -340,26 +340,19 @@
       var successMsg = document.getElementById('success-message');
       var submitBtn = document.getElementById('submit-btn');
 
-      // Desabilita o botão
       submitBtn.disabled = true;
       submitBtn.textContent = 'A enviar...';
 
-      // Cria os dados do formulário
       var formData = new FormData(form);
 
-      // Envia via fetch
       fetch(form.action, {
         method: 'POST',
         body: formData
       })
       .then(function(response) {
-        // Se a resposta for ok (status 200-299)
         if (response.ok) {
-          // Exibe a mensagem de sucesso
           successMsg.style.display = 'block';
-          // Limpa os campos
           form.reset();
-          // Oculta a mensagem após 8 segundos
           setTimeout(function() {
             successMsg.style.display = 'none';
           }, 8000);
@@ -369,30 +362,23 @@
       })
       .catch(function(error) {
         alert('Erro de rede. Verifique sua conexão.');
-        console.error('Erro no fetch:', error);
+        console.error(error);
       })
       .finally(function() {
-        // Reativa o botão
         submitBtn.disabled = false;
         submitBtn.textContent = 'Submeter';
       });
 
-      // Retorna false para garantir que o navegador não continue o envio
       return false;
     };
 
-    // Também adiciona um listener por segurança (caso o onsubmit inline não funcione)
+    // Listener adicional por segurança
     document.addEventListener('DOMContentLoaded', function() {
       var form = document.getElementById('contact-form');
       if (form) {
-        // Se o formulário já tiver o onsubmit, este listener complementa
         form.addEventListener('submit', function(e) {
-          // Se o handleSubmit já foi chamado pelo inline, evitamos duplicar
-          // Mas como o inline retorna false, o evento padrão já foi cancelado
-          // Então este listener pode apenas garantir
           e.preventDefault();
           e.stopPropagation();
-          // Se por algum motivo o handleSubmit não foi chamado, chamamos manualmente
           if (!window._submitting) {
             window._submitting = true;
             handleSubmit(e);
